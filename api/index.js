@@ -13,15 +13,21 @@ const connection = mysql.createConnection({
 })
 
 var app = express()
-
 const port  = 5000;
-
 app.use(cors())
-
 app.get('/hello_word', function (req, res, next) {
   res.json({msg: 'Hello_node'})
 })
 
 app.listen(port, function () {
   console.log('localhost:'+port)
+})
+
+app.get('/users', function(req,res,next){
+  connection.query(
+    'SELECT * FROM `users`',
+    function(err,results, fielda){
+      res.json(results)
+    }
+  )
 })
